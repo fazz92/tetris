@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tetris Game</title>
+  <style type="text/css">
+    h1 {
+      text-align: center;
+    }
+    .game-container {
+      display: flex;
+    }
+    .game {
+      flex: 2;
+      text-align: center;
+    }
+    .other {
+      flex: 1;
+    }
+    .other .item {
+      margin-bottom: 10px;
+    }
+    .other label {
+      font-weight: bold;
+    }
+    .modal-overlay.hide {
+      display: none;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.65);
+      height: 100%;
+      display: block;
+    }
+    .modal {
+      background: #fff;
+      min-width: 450px;
+      max-width: 450px;
+      left: 50%;
+      position: fixed;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      box-sizing: border-box;
+      padding: 20px 0;
+    }
+    .modal-header {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #dcdada;
+    }
+    .modal-content {
+      padding: 10px 20px;
+      border-bottom: 1px solid #dcdada;
+      display: flex;
+    }
+    .modal-footer {
+      padding: 20px 20px 0;
+      text-align: center;
+      position: relative;
+    }
+    .btn {
+      -webkit-appearance: none;
+      padding: 7px 15px;
+      cursor: pointer;
+      color: #fff;
+      background: #3737fd;
+      vertical-align: middle;
+    }
+    .form-group {
+      flex-grow: 1;
+      width: 50%;
+    }
+    .form-group label {
+      font-size: 12px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .error-container {
+      position: absolute;
+      top: 5px;
+      left: 20px;
+      margin: 0;
+      font-size: 12px;
+      color: #c50303;
+    }
+    #game-paused {
+      display: block;
+      color: red;
+      font-size: 18px;
+    }
+    #game-paused.hide {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tetris game</h1>
+  <div class="game-container">
+    <div class="game">
+      <canvas id="tetris-game" width="400px" height="200px"></canvas>
+    </div>
+    <div class="other">
+      <div class="item hide" id="game-paused">
+          Game Paused!!
+      </div>
+      <div class="item">
+        Score: <span id="current-score">0</span>
+      </div>
+      <div class="item">
+        Level: <span id="current-level">1</span>
+      </div>
+      <div class="item">
+        Next Tile: <span id="next-tile"></span>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal-overlay" id="start-modal">
+    <div class="modal">
+      <div class="modal-header">Please select level and grid size to start with the game</div>
+      <div class="modal-content">
+        <div class="form-group">
+          <label>Select Number of rows</label>
+          <input type="text" name='rows' id="rows"/>
+        </div>
+        <div class="form-group">
+          <label>Select Number of columns</label>
+          <input type="text" name='columns' id="columns"/>
+        </div>
+        <div class="form-group">
+          <label>Select difficulty level</label>
+          <select id="difficulty-level">
+            <option value="">Select Value</option>
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+            <option value="V">V</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p class="error-container" id="error"></p>
+        <button class="btn" id="start-game">Play Now</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay hide" id="game-over">
+    <div class="modal">
+      <div class="modal-header">Alert!</div>
+      <div class="modal-content">
+        Game over please click on 'Play Again for new game'
+      </div>
+      <div class="modal-footer">
+        <button class="btn" id="play-again">Play Now</button>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="build/bundle.js"></script>
+</body>
+</html>
